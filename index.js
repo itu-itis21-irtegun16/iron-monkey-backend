@@ -3,7 +3,6 @@ const cors =  require('cors');
 const mongoose = require('mongoose');
 const Deneme = require('./models/deneme')
 const NewSaying = require('./models/newSaying')
-// const bcrypt = require('bcrypt');
 const bodyParser = require('body-parser');
 const jwt = require('jsonwebtoken');
 const { db } = require('./models/deneme');
@@ -280,6 +279,6 @@ server.post('/sign-in', (req,res,next) => {
 })
 
 
-server.listen(()=>{
+server.listen(8080,()=>{
     console.log(`1 server started on port ${PORT}`)
 })
