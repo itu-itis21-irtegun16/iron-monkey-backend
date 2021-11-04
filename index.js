@@ -23,7 +23,7 @@ mongoose.connect(dbUrl, {useNewUrlParser: true, useUnifiedTopology: true, useFin
 
 
 server.get('/', (req,res) =>{
-    res.send('selam')
+    res.send('selam87')
 })
 
 server.get('/wise-saying', (req,res) =>{
