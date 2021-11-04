@@ -16,7 +16,7 @@ server.use(bodyParser.json())
 
 const dbUrl= "mongodb+srv://Kaan:12300321mk@mongodb.zpfds.mongodb.net/deneme?retryWrites=true&w=majority";
 
-mongoose.connect(dbUrl, {useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false, useCreateIndex: true})
+mongoose.connect(dbUrl, {useNewUrlParser: true, useUnifiedTopology: true,  useCreateIndex: true})
     .then((result) => console.log("bağlantı oky"))
     .catch((err) => console.log("olmadı",err))
 
