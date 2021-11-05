@@ -49,18 +49,20 @@ server.post('/register', (req,res,next)=>{
         wight: req.body.weight,
         tall: req.body.tall,
     });
-
-    newUser.save(err => {
-        if(err){
-            return res.status(400).json({
-                error: 'email in use',
-                title: error
+    try {
+        newUser.save(err => {
+            if(err){
+                return res.status(400).json({
+                    title: 'Email alreday exits',
+                })
+            }
+            return res.status(200).json({
+                title: 'registration completed successfully',
             })
-        }
-        return res.status(200).json({
-            title: 'register is successfuly',
         })
-    })
+    } catch (error) {
+        console.log(error)
+    }
 })
 
 function addLike(req,res){
@@ -269,16 +271,24 @@ server.post('/sign-in', (req,res,next) => {
                 error: 'invalid credentials'
             })
         }
-        let token = jwt.sign({ userId: user._id}, 'secretkey');
-        return res.status(200).json({
-            title: 'login success',
-            token: token,
-            user: user
-        })
+        if(req.body.password == user.password){
+            let token = jwt.sign({ userId: user._id}, 'secretkey');
+            return res.status(200).json({
+                title: 'login success',
+                token: token,
+                user: user
+            })
+        }
+        else{
+            return res.status(401).json({
+                title: 'wrong password',
+                error: 'invalid credentials'
+            })
+        }
     })
 })
 
 
-server.listen(8080,()=>{
+server.listen(3000,()=>{
     console.log(`1 server started on port ${PORT}`)
 })
