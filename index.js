@@ -289,6 +289,6 @@ server.post('/sign-in', (req,res,next) => {
 })
 
 
-server.listen(3000,()=>{
+server.listen(8080,()=>{
     console.log(`1 server started on port ${PORT}`)
 })
