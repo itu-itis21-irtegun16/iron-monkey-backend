@@ -288,7 +288,21 @@ server.post('/sign-in', (req,res,next) => {
     })
 })
 
+server.post('/updateUser', (req,res,next) =>{
+    Deneme.findByIdAndUpdate(req.body.user_id,{gender : req.body.gender, tall : req.body.tall, wight : req.body.weight}, (err,user) =>{
+        if(err){
+            return res.status(500).json({
+                title : 'something wrong'
+            })
+        }else {
+            return res.status(200).json({
+                title: 'user has ben updated succesfully'
+            })
+        }
+    })
+})
 
-server.listen(8080,()=>{
+
+server.listen(3000,()=>{
     console.log(`1 server started on port ${PORT}`)
 })
