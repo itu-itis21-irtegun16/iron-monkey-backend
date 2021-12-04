@@ -48,6 +48,7 @@ server.post('/register', (req,res,next)=>{
         birthday: req.body.birthday,
         wight: req.body.weight,
         tall: req.body.tall,
+        // workoutPrograms : []
     });
     try {
         newUser.save(err => {
@@ -301,6 +302,63 @@ server.post('/updateUser', (req,res,next) =>{
         }
     })
 })
+
+server.post('/saveWorkout' ,(req, res, next) =>{
+    Deneme.findOne({ _id: req.body.user_id}, (err,user) => {
+        if(user){
+            var updateValue = user.workoutPrograms;
+            updateValue.push({
+                'workoutList' : req.body.workoutList,
+                'workoutName' : req.body.workoutName,
+                'workoutTime' : req.body.workoutTime
+            })
+            Deneme.findByIdAndUpdate(user._id, {workoutPrograms : updateValue}, (err,message) =>{
+                if(err){
+                    console.log(err)
+                    return res.status(500).json({
+                        title : 'something wrong'
+                    })
+                }else {
+                    return res.status(200).json({
+                        title: 'workout has been added to list'
+                    })
+                }
+            })
+        }else{
+            return res.status(401).json({
+                title: 'user not found',
+                error: 'invalid credentials'
+            })
+        }
+    })
+})
+
+server.post('/saveEvent' ,(req, res, next) =>{
+    Deneme.findOne({ _id: req.body.user_id}, (err,user) => {
+        if(user){
+            var updateValue = user.events;
+            updateValue.push(req.body.eventDetails)
+            Deneme.findByIdAndUpdate(user._id, {events : updateValue}, (err,message) =>{
+                if(err){
+                    console.log(err)
+                    return res.status(500).json({
+                        title : 'something wrong'
+                    })
+                }else {
+                    return res.status(200).json({
+                        title: 'Event has been added to calendar'
+                    })
+                }
+            })
+        }else{
+            return res.status(401).json({
+                title: 'user not found',
+                error: 'invalid credentials'
+            })
+        }
+    })
+})
+
 
 
 server.listen(8080,()=>{

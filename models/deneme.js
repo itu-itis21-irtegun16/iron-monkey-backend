@@ -9,6 +9,8 @@ const deneme = new Schema({
         unique: true,
         type: String
     },
+    events : Array,
+    workoutPrograms : Array,
     password: String,
     gender: String,
     birthday: Date,
