@@ -6,9 +6,6 @@ const NewSaying = require('./models/newSaying')
 const bodyParser = require('body-parser');
 const jwt = require('jsonwebtoken');
 const { db } = require('./models/deneme');
-var util= require('util');
-const utf8Encoder = new util.TextEncoder();
-const utf8Decoder = new util.TextEncoder("utf-8", { ignoreBOM: true });
 
 const PORT= 8080;
 const server = express();
